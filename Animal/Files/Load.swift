@@ -8,23 +8,6 @@
 
 import Foundation
 
-func save(node: Node) {
-    let encoder = JSONEncoder()
-    encoder.outputFormatting = .prettyPrinted
-
-    do {
-        let jsonData = try encoder.encode(node)
-        let filename = getDocumentsDirectory().appendingPathComponent("Animal.txt")
-        do {
-            try jsonData.write(to: filename)
-        } catch {
-            print("Error writing file.")
-        }
-    } catch {
-        print(error.localizedDescription)
-    }
-}
-
 func load() -> Node {
     let filename = getDocumentsDirectory().appendingPathComponent("Animal.txt")
     do {
@@ -34,7 +17,7 @@ func load() -> Node {
         return root
     } catch {
         print(error.localizedDescription)
-        return Node(info: "Does it fly?", yes: Node(info: "Bird", yes: nil, no: nil), no: Node(info: "Dog", yes: nil, no: nil))
+        return Node(question: "Does it fly?", yes: Node(name: "Bird"), no: Node(name: "Dog"))
     }
 }
 
